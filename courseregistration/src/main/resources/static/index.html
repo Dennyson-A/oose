@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Registration</title>
+</head>
+<body>
+    <h2>Register for a Course</h2>
+    <form id="courseForm">
+        <label>Registration Number:</label><br>
+        <input type="text" id="regNo" required><br>
+        <label>Course Name:</label><br>
+        <input type="text" id="courseName" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('courseForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const regNo = document.getElementById('regNo').value;
+            const courseName = document.getElementById('courseName').value;
+
+            fetch('http://localhost:8080/api/courses', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ regNo, courseName }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Course registered successfully!");
+                document.getElementById('courseForm').reset();
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
