@@ -1,0 +1,2 @@
+use course_db;
+select * from course;
