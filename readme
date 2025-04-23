@@ -1,2 +1,4 @@
 use course_db;
 select * from course;
+
+mvn string-boot:run
